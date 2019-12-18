@@ -17,6 +17,12 @@ const checkSession = ()=>{
     setDisp();
 };
 
+const checkLocal = ()=>{
+    if( localStorage.getItem("totalrates") == null){
+        localStorage.setItem("totalrates", 0);
+    };
+};
+
 const setDisp = ()=>{
     ratesDisp.firstElementChild.textContent = rates;
 }
@@ -29,6 +35,10 @@ const rate = ()=>{
     rateFunc();
     console.log(rates);
     sessionStorage.setItem("rates", rates);
+    let totalrates = parseInt(localStorage.getItem("totalrates"));
+    totalrates ++;
+    console.log(totalrates);
+    localStorage.setItem("totalrates", totalrates);
 };
 
 const rated = ()=>{
@@ -66,4 +76,5 @@ const rateFunc = ()=>{
 }
 
 window.addEventListener("load", checkSession);
+window.addEventListener("load", checkLocal);
 actionBtn.addEventListener("click", rate);
