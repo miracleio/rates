@@ -2,12 +2,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    transition: 0.20s ease-in-out;
+    transition: 0.21s ease-in-out;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 700;
 
     &::before, &::after{
-        transition: 0.20s ease-in-out;
+        transition: 0.21s ease-in-out;
     }
 }
 
@@ -19,8 +19,8 @@
     --text: #f3f3f7;
 }
 
-@mixin border-radius($rad : 0.65em) {
-    border-radius: $rad;
+@mixin border-radius($rad : 0.65em, $rad2 : 0.65em) {
+    border-radius: $rad2 $rad2 $rad $rad;
 }
 
 .main{
@@ -29,20 +29,79 @@
     position: relative;
 }
 
-.action-cont{
-    width: 300px;
-    height: 78px;
+.post{
+    min-width: 270px;
+    // width: 400px;
+    // height: 78px;
     position: absolute;
-    background: var(--bg);
+    // background: var(--bg);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    // overflow: hidden;
     @include border-radius();
+    border: 3px solid var(--stroke);
+    box-shadow: 5px 5px var(--stroke);
+    
+    & > div{
+        padding: 1em;
+    }
+
+    .avatar{
+        width: 60px;
+        height: 60px;
+        background: var(--action);
+        @include border-radius(50%, 50%);
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: 3px solid var(--stroke);
+        transform: translateX(-150%);
+        padding: 0;
+        overflow: hidden;
+
+        img{
+            width: 100%;
+        }
+    }
+
+    .post-head{
+        div{
+            display: inline;
+            margin: 0 1em 0 0;
+        }
+        .name{
+            span{
+                font-weight: 100;
+            }
+        }
+        .time{
+            float: right;
+            opacity: 0.45;
+        }
+    }
+
+    .body{
+        padding-top: 0;
+        font-weight: 400;
+    }
+}
+
+.action-cont{
+    // width: 300px;
+    height: 78px;
+    position: relative;
+    background: var(--bg);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // border-top: 3px solid var(--stroke);
+    @include border-radius(0.65em,0);
 
     button{
         position: relative;
-        background: transparent;
         border: 3px solid var(--stroke);
+        background: var(--bg);
         padding: 1em 2em;
         color: var(--stroke);
         top: 50%;
@@ -53,28 +112,32 @@
         @include border-radius();
 
         i{
-            mix-blend-mode: hard-light;
-            transition: mix-blend-mode 0s ;
+            color: var(--stroke);
         }
 
         &::before{
             content: "";
             position: absolute;
             z-index: -1;
-            width: calc(100% + 2px);
+            width: calc(100%);
             height: 100%;
             background: var(--action);
+            border: 3px solid var(--stroke);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             clip-path: circle(0% at 0% 100%);   
-            @include border-radius(0.54em);
+            @include border-radius();
 
         }
 
         &:active{
             transform: translate( -50%, calc(-50% + 5px));
             box-shadow: 0 0px var(--stroke);
+            color: var(--text);
+        }
+
+        &:active i{
             color: var(--text);
         }
 
@@ -99,7 +162,7 @@
             left: 100%;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 0 3px var(--stroke);
-            @include border-radius(2em);
+            @include border-radius(2em, 2em);
             
             div{
                 margin: auto;
@@ -117,6 +180,10 @@
 
 .rated{
     color: var(--text)!important;
+
+    & i{
+        color: var(--text)!important;
+    }
     &::before{
         clip-path: circle(100% at 50% 100%)!important;    
     }
