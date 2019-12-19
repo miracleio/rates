@@ -17,6 +17,9 @@
     --bg: #f4f7ff;
     --stroke: #5f6c8e;
     --text: #f3f3f7;
+
+
+    background: var(--body);
 }
 
 @mixin border-radius($rad : 0.65em, $rad2 : 0.65em) {
